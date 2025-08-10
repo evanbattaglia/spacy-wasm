@@ -2,7 +2,10 @@ import micropip
 from pyodide import to_js
 
 PACKAGES_PATH = "/packages"
-CUSTOM_BUILT_PKG_NAMES = list(map(lambda name: f"{PACKAGES_PATH}/{name}-cp310-cp310-emscripten_3_1_14_wasm32.whl", [
+CUSTOM_BUILT_PKG_NAMES = [
+        f"{PACKAGES_PATH}/langcodes-3.3.0-py3-none-any.modified.whl",
+        f"{PACKAGES_PATH}/urllib3-2.2.0-py3-none-any.modified.whl",
+]+ list(map(lambda name: f"{PACKAGES_PATH}/{name}-cp310-cp310-emscripten_3_1_14_wasm32.whl", [
     "blis-0.7.8",
     "cymem-2.0.6",
     "murmurhash-1.0.7",
