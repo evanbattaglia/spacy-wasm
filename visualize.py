@@ -13,29 +13,29 @@ CUSTOM_BUILT_PKG_NAMES = [
     "srsly-2.4.3",
     "thinc-8.1.0",
     "spacy-3.4.0",
-]))
-SPACY_MODEL_NAME = "en_core_web_sm"
+])) 
+SPACY_MODEL_NAME = "fr_core_news_md"
 SPACY_MODEL_VERSION = "3.4.0"
 
-
-def visualize(text):
-    print("Loading spacy model...")
-    import spacy
-    from spacy import displacy
-
-    nlp = spacy.load(SPACY_MODEL_NAME)
-
-    doc = nlp(text)
-
-    print("Visualizing...")
-    render = displacy.render(doc, style="ent")
-
-    return to_js(render)
 
 # flake8: noqa
 await micropip.install([
         f"{PACKAGES_PATH}/{SPACY_MODEL_NAME}-{SPACY_MODEL_VERSION}-py3-none-any.whl"
     ] + CUSTOM_BUILT_PKG_NAMES)  # type: ignore
+
+print("Loading spacy model...")
+import spacy
+from spacy import displacy
+
+nlp = spacy.load(SPACY_MODEL_NAME)
+
+def visualize(text):
+    doc = [token.lemma_ for token in nlp(text)]
+
+    # print("Visualizing...")
+    # render = displacy.render(doc, style="ent")
+
+    return to_js(doc)
 
 # Return the visualize function to JS
 visualize # type: ignore

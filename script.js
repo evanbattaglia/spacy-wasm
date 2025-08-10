@@ -11,7 +11,7 @@ async function loadVisualize(pyodide) {
 async function main() {
   // Set default value for input
   document.getElementById("input").value =
-    "Hello! Guess what? I'm running Python in your browser!\n\nMy name is Clara and I live in Berkeley, California.";
+    "Wikipédia est définie par des principes fondateurs. Son contenu est sous licence Creative Commons BY-SA. Il peut être copié et réutilisé sous la même licence, sous réserve d'en respecter les conditions.";
 
   // Load Pyodide and packages
   let pyodide = await loadPyodide();
@@ -31,9 +31,9 @@ async function main() {
 
     let input = document.getElementById("input").value;
 
-    let html = vis_fn(input);
+    let json = vis_fn(input);
 
-    document.getElementById("output").innerHTML = html;
+    document.getElementById("output").innerText = JSON.stringify(json);
   });
 }
 
