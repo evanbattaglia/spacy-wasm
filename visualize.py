@@ -1,7 +1,7 @@
 import micropip
 from pyodide import to_js
 
-PACKAGES_PATH = "/packages"
+PACKAGES_PATH = "./packages"
 CUSTOM_BUILT_PKG_NAMES = [
         f"{PACKAGES_PATH}/langcodes-3.3.0-py3-none-any.modified.whl",
         f"{PACKAGES_PATH}/urllib3-2.2.0-py3-none-any.modified.whl",

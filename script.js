@@ -3,7 +3,7 @@ async function loadPackages(pyodide) {
 }
 
 async function loadVisualize(pyodide) {
-  let python_script = await fetch("/visualize.py").then((r) => r.text());
+  let python_script = await fetch("./visualize.py").then((r) => r.text());
 
   return await pyodide.runPythonAsync(python_script);
 }
