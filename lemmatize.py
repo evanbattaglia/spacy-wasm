@@ -29,13 +29,9 @@ from spacy import displacy
 
 nlp = spacy.load(SPACY_MODEL_NAME)
 
-def visualize(text):
+def lemmatize(text):
     doc = [token.lemma_ for token in nlp(text)]
-
-    # print("Visualizing...")
-    # render = displacy.render(doc, style="ent")
-
     return to_js(doc)
 
-# Return the visualize function to JS
-visualize # type: ignore
+# Return the lemmatize function to JS
+lemmatize # type: ignore

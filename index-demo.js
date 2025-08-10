@@ -2,8 +2,8 @@ async function loadPackages(pyodide) {
   await pyodide.loadPackage(["micropip", "numpy", "pydantic"]);
 }
 
-async function loadVisualize(pyodide) {
-  let python_script = await fetch("./visualize.py").then((r) => r.text());
+async function loadLemmatize(pyodide) {
+  let python_script = await fetch("./lemmatize.py").then((r) => r.text());
 
   return await pyodide.runPythonAsync(python_script);
 }
@@ -18,12 +18,12 @@ async function main() {
 
   await loadPackages(pyodide);
 
-  // Load visualize function
-  vis_fn = await loadVisualize(pyodide);
+  // Load lemmatize function
+  vis_fn = await loadLemmatize(pyodide);
 
   // Enable the form button and change label
   document.getElementById("submit").disabled = false;
-  document.getElementById("submit").innerHTML = "Visualize";
+  document.getElementById("submit").innerHTML = "Lemmatize";
 
   // Add event listener to form
   document.getElementById("form").addEventListener("submit", (e) => {
