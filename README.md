@@ -9,3 +9,6 @@ I'm using [pyodide](https://github.com/pyodide/pyodide) which is essentially cpy
 To be noted, spacy and certain other depending libraries need to be compiled into web assembly (since they are written in C, pure python packages can be directly imported). I made use of [exodide](https://github.com/ymd-h/exodide) and this [DockerFile](https://github.com/ymd-h/exodide/blob/master/example-spaCy/Dockerfile) to build the packages. Additionally, I have put sample packages that I built in the `packages` directory.
 
 > `en_core_web_sm` doesn't need compiling since its pure python by default.
+
+## Lemmatizer demo
+I (evanbattaglia) have added a lemmatizer demo that can be loaded in an iframe and communicated with via postMessages.
