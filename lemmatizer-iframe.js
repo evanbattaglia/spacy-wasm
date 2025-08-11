@@ -19,11 +19,12 @@ async function main() {
     // set up postmessage listener:
     window.addEventListener("message", async (event) => {
       if (event.data.type === "lemmatize") {
+        const messageId = event.data.messageId;
         // Call the lemmatize function with the input data
         let input = event.data.input;
         let json = vis_fn(input);
         // Send the result back to the parent window
-        window.parent.postMessage({ type: "result", data: json }, "*");
+        window.parent.postMessage({ type: "result", messageId, data: json }, "*");
       }
     });
   } catch (error) {
