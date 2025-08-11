@@ -9,20 +9,28 @@ async function loadLemmatize(pyodide) {
 }
 
 async function main() {
-  let pyodide = await loadPyodide();
-  await loadPackages(pyodide);
-  // Load lemmatize function
-  vis_fn = await loadLemmatize(pyodide);
-  // set up postmessage listener:
-  window.addEventListener("message", async (event) => {
-    if (event.data.type === "lemmatize") {
-      // Call the lemmatize function with the input data
-      let input = event.data.input;
-      let json = vis_fn(input);
-      // Send the result back to the parent window
-      window.parent.postMessage({ type: "result", data: json }, "*");
-    }
-  });
+  try {
+    document.getElementById("status-emoji").innerHTML = "⏳"; // 🏁
+    let pyodide = await loadPyodide();
+    await loadPackages(pyodide);
+    // Load lemmatize function
+    vis_fn = await loadLemmatize(pyodide);
+    document.getElementById("status-emoji").innerHTML = "🏁"; // 🏁
+    // set up postmessage listener:
+    window.addEventListener("message", async (event) => {
+      if (event.data.type === "lemmatize") {
+        // Call the lemmatize function with the input data
+        let input = event.data.input;
+        let json = vis_fn(input);
+        // Send the result back to the parent window
+        window.parent.postMessage({ type: "result", data: json }, "*");
+      }
+    });
+  } catch (error) {
+    console.error("Error loading Pyodide or lemmatize function:", error);
+    document.getElementById("status-emoji").innerHTML = "⚠️";
+    throw error;
+  }
 }
 
 main();
