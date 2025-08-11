@@ -25,13 +25,15 @@ async function main() {
   document.getElementById("submit").disabled = false;
   document.getElementById("submit").innerHTML = "Lemmatize";
 
+    window.visFn = vis_fn;
   // Add event listener to form
   document.getElementById("form").addEventListener("submit", (e) => {
     e.preventDefault();
 
     let input = document.getElementById("input").value;
 
-    let json = vis_fn(input);
+    window.visFn = vis_fn;
+    let json = vis_fn(input).map(item => Object.fromEntries([...item]));
 
     document.getElementById("output").innerText = JSON.stringify(json);
   });

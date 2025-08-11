@@ -19,11 +19,18 @@ async function main() {
     // set up postmessage listener:
     window.addEventListener("message", async (event) => {
       if (event.data.type === "lemmatize") {
+        if (event.debug) {
+          console.log("LEMMATIZER debug: received message", event.data);
+        }
         const messageId = event.data.messageId;
         // Call the lemmatize function with the input data
         const results = event.data.texts.map(input => {
           try {
-            return {ok: vis_fn(input)};
+            const tokens = vis_fn(input);
+            const serializableTokens = tokens.map(token =>
+               Object.fromEntries([...token])
+            );
+            return {ok: serializableTokens};
           } catch (e) {
             return {err: e.toString()};
           }

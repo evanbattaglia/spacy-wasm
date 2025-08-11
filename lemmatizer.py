@@ -29,8 +29,21 @@ from spacy import displacy
 
 nlp = spacy.load(SPACY_MODEL_NAME)
 
+def pick_fields(token):
+    """Pick the fields we want to return from a token."""
+    return {
+        "text": token.text,
+        "lemma": token.lemma_,
+        "pos": token.pos_,
+        "tag": token.tag_,
+        "whitespace": token.whitespace_,
+        "isAlpha": token.is_alpha,
+        "isPunct": token.is_punct,
+        "likeNum": token.like_num
+    }
+
 def lemmatize(text):
-    doc = [token.lemma_ for token in nlp(text)]
+    doc = [pick_fields(token) for token in nlp(text)]
     return to_js(doc)
 
 # Return the lemmatize function to JS
