@@ -24,7 +24,7 @@ async function main() {
         let input = event.data.input;
         let json = vis_fn(input);
         // Send the result back to the parent window
-        window.parent.postMessage({ type: "result", messageId, data: json }, "*");
+        window.parent.postMessage({ type: "lemmatizeResult", messageId, data: json }, "*");
       }
     });
   } catch (error) {
