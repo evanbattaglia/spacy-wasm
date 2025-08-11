@@ -21,10 +21,15 @@ async function main() {
       if (event.data.type === "lemmatize") {
         const messageId = event.data.messageId;
         // Call the lemmatize function with the input data
-        let input = event.data.input;
-        let json = vis_fn(input);
+        const results = event.data.texts.map(input => {
+          try {
+            return {ok: vis_fn(input)};
+          } catch (e) {
+            return {err: e.toString()};
+          }
+        });
         // Send the result back to the parent window
-        window.parent.postMessage({ type: "lemmatizeResult", messageId, data: json }, "*");
+        window.parent.postMessage({ type: "lemmatizeResult", messageId, results }, "*");
       }
     });
   } catch (error) {
