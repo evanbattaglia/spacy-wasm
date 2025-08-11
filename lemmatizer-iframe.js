@@ -3,7 +3,7 @@ async function loadPackages(pyodide) {
 }
 
 async function loadLemmatize(pyodide) {
-  let python_script = await fetch("./lemmatize.py").then((r) => r.text());
+  let python_script = await fetch("./lemmatizer.py").then((r) => r.text());
 
   return await pyodide.runPythonAsync(python_script);
 }
@@ -15,7 +15,7 @@ async function main() {
     await loadPackages(pyodide);
     // Load lemmatize function
     vis_fn = await loadLemmatize(pyodide);
-    document.getElementById("status-emoji").innerHTML = "🏁"; // 🏁
+    document.getElementById("status-emoji").innerHTML = "✨"; // 🏁
     // set up postmessage listener:
     window.addEventListener("message", async (event) => {
       if (event.data.type === "lemmatize") {

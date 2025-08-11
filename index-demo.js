@@ -3,7 +3,7 @@ async function loadPackages(pyodide) {
 }
 
 async function loadLemmatize(pyodide) {
-  let python_script = await fetch("./lemmatize.py").then((r) => r.text());
+  let python_script = await fetch("./lemmatizer.py").then((r) => r.text());
 
   return await pyodide.runPythonAsync(python_script);
 }
