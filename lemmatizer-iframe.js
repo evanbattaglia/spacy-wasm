@@ -22,6 +22,7 @@ async function main() {
         if (event.debug) {
           console.log("LEMMATIZER debug: received message", event.data);
         }
+        document.getElementById("status-emoji").innerHTML = "🔢"; // 🏁
         const messageId = event.data.messageId;
         // Call the lemmatize function with the input data
         const results = event.data.texts.map(input => {
@@ -35,6 +36,7 @@ async function main() {
             return {err: e.toString()};
           }
         });
+        document.getElementById("status-emoji").innerHTML = "✨"; // 🏁
         // Send the result back to the parent window
         window.parent.postMessage({ type: "lemmatizeResult", messageId, results }, "*");
       }
